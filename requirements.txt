@@ -1,0 +1,6 @@
+sounddevice
+soundfile
+pynput
+google-generativeai
+numpy
+vosk
