@@ -51,9 +51,10 @@ def make_post_request(message, voice_id):
         print(f"Error {response.status_code}: {response.text}")
     return response
 
-def generate_voice_over(message, character, voice_id):
+def generate_voice_over(message, character):
     """Generate a voice-over and save it to a file"""
     # Make the POST request to the TTS API with headers and data, enabling streaming response
+    voice_id = CHAR_VOICE_MAPPING[character]
     response = make_post_request(message, voice_id)
     
     # Check if the request was successful
@@ -71,7 +72,8 @@ def generate_voice_over(message, character, voice_id):
         print(response.text)
 
 
-def play_voice_over(voice_over_fpath):
+def play_voice_over(character):
+    voice_over_fpath = cfg.V_VOICE_OVER_PATH if character == "V" else cfg.NPC_VOICE_OVER_PATH
     try:
         pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=512)  # Small buffer for low latency
         pygame.mixer.music.load(voice_over_fpath)
@@ -83,13 +85,6 @@ def play_voice_over(voice_over_fpath):
     except Exception as e:
         print(f"Error playing audio: {e}")
 
-
-def voice_message(message, character):
-    """Generate a voice-over and play it"""
-    voice_id = CHAR_VOICE_MAPPING[character]
-    generate_voice_over(message, character, voice_id)
-    voice_over_fpath = cfg.V_VOICE_OVER_PATH if character == "V" else cfg.NPC_VOICE_OVER_PATH
-    play_voice_over(voice_over_fpath)
     
 
     

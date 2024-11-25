@@ -13,10 +13,11 @@ if not ELLABS_API_KEY:
     raise ValueError("11LABS_API_KEY must be set as environment variable")
 
 
-## Whether to voice V and NPCs
+## Voicing
 VOICE_V = True
 VOICE_NPCS = True
 
+VOICE_DELAY = 0.5  # in seconds
 
 ## Config for Voice Input
 ENABLE_VOICE_INPUT = False
@@ -44,4 +45,5 @@ USER_RECORDING_FPATH = "results/user_recording.wav"
 
 # Model paths
 VOSK_MODEL_PATH = "models/vosk-model-en-us-0.22"
+
 
